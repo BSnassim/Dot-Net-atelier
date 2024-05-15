@@ -12,5 +12,7 @@ namespace AM.ApplicationCore.Interfaces
         public IList<Flight> GetFlights(int n);
         public Boolean PlacesAvailable(Flight flight, int n);
         public IList<Staff> GetStaffs(int flightId);
+        public List<Passenger> PlanePassengers(Plane plane, DateTime date);
+        public void PassengerCountBetweenDates(DateTime start, DateTime end);
     }
 }

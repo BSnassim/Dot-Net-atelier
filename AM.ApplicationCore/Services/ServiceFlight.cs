@@ -33,7 +33,25 @@ namespace AM.ApplicationCore.Services
         }
         public IList<Staff> GetStaffs(int flightId)
         {
-            return _unitOfWork.Repository<Staff>().GetAll()
+            //return _unitOfWork.Repository<Staff>().GetAll()
+            return null;
+        }
+        public List<Passenger> PlanePassengers(Plane plane, DateTime date)
+        {
+            return _unitOfWork.Repository<Passenger>().GetAll()
+                .Where(p=>p.Tickets.Any(t=>t.Flight.FlightPlane.PlaneId == plane.PlaneId && t.Flight.FlightDate == date))
+                .ToList();
+        }
+        public void PassengerCountBetweenDates(DateTime start, DateTime end)
+        {
+            var query = GetMany(f => f.FlightDate >= start && f.FlightDate <= end)
+                .SelectMany(f => f.Tickets)
+                .GroupBy(t => t.Flight.FlightDate)
+                .Select(g => new { Date = g.Key, Count = g.Count() });
+            foreach (var item in query)
+            {
+                Console.WriteLine($"Date: {item.Date}, Nombre de passengers: {item.Count}");
+            }
         }
     }
 }

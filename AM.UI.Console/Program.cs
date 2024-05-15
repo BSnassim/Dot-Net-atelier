@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using AM.ApplicationCore.Domain;
+using AM.ApplicationCore.Interfaces;
 using AM.ApplicationCore.Services;
 using AM.Infrastructure;
 
@@ -32,3 +33,6 @@ AMContext context = new AMContext { };
 //context.Flights.Add(TestData.flight2);
 //context.SaveChanges();
 Console.WriteLine(context.Flights.First().FlightPlane.Capacity);
+
+//IUnitOfWork unitOfWork = new UnitOfWork(context);
+//ServiceFlight serviceFlight = new ServiceFlight();
